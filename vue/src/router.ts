@@ -1,23 +1,44 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import Layout from './views/layout/Layout.vue';
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home,
+      path: '',
+      component: Layout,
+      redirect: 'home',
+      children: [
+        {
+          path: 'home',
+          name: 'Home',
+          component: () => import('./views/home/index.vue'),
+          meta: { title: 'Home', icon: 'home', noCache: true },
+        },
+      ],
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      path: '/example',
+      component: Layout,
+      redirect: '/example/table',
+      name: 'Example',
+      meta: {title: 'Example', icon: 'example'},
+      children: [
+        {
+          path: 'table',
+          name: 'Table',
+          component: () => import('./views/table/index.vue'),
+          meta: {title: 'Table', icon: 'table'},
+        },
+        {
+          path: 'tree',
+          name: 'Tree',
+          component: () => import('./views/table/index2.vue'),
+          meta: {title: 'Tree', icon: 'tree' },
+        },
+      ],
     },
   ],
 });
