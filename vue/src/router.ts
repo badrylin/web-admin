@@ -5,7 +5,12 @@ import Layout from './views/layout/Layout.vue';
 Vue.use(Router);
 
 export default new Router({
+  // mode: 'history',
   routes: [
+    {
+      path: '/login',
+      component: () => import(/* webpackChunkName: "login" */'./views/login/index.vue'),
+    },
     {
       path: '',
       component: Layout,

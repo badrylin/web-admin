@@ -8,7 +8,9 @@ import '@/registerServiceWorker';
 import '@/plugins/element.ts';
 import '@/styles/index.less';
 import '@/icons';
+import './permission';
 import './mock';
+
 
 Vue.config.productionTip = false;
 Vue.use(SvgIcon, {
