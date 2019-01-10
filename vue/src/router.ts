@@ -12,9 +12,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "login" */'./views/login/index.vue'),
     },
     {
-      path: '',
+      path: '/',
       component: Layout,
-      redirect: 'home',
+      redirect: '/home',
       children: [
         {
           path: 'home',
@@ -42,6 +42,16 @@ export default new Router({
           name: 'Tree',
           component: () => import('./views/table/index2.vue'),
           meta: {title: 'Tree', icon: 'tree' },
+        },
+      ],
+    },
+    {
+      path: 'external-link',
+      component: Layout,
+      children: [
+        {
+          path: 'https://www.baidu.com',
+          meta: { title: 'ExternalLink', icon: 'link' },
         },
       ],
     },

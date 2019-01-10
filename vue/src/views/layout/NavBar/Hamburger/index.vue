@@ -1,11 +1,12 @@
 <template>
   <div>
-    <svg-icon
-      name="hamburger"
-      class="hamburger"
-      :class="{'is-active':isActive}"
-      @click="toggleClick"
-    ></svg-icon>
+    <span @click="toggleClick">
+      <svg-icon
+        name="hamburger"
+        class="hamburger"
+        :class="{'is-active':isActive}"
+      ></svg-icon>
+    </span>
   </div>
 </template>
 <script lang="ts">
@@ -27,6 +28,8 @@ export default class Hamburger extends Vue {
   transform: rotate(90deg);
   transition: 0.38s;
   transform-origin: 50% 50%;
+  font-size: 20px;
+  vertical-align: 0 !important;
   &.is-active {
     transform: rotate(0deg);
   }

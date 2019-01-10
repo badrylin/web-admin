@@ -28,14 +28,6 @@ class User extends VuexModule implements IUserState {
     };
   }
 
-  @MutationAction({ mutate: ['token'] })
-  async FedLogout() {
-    removeToken();
-    return {
-      token: '',
-    };
-  }
-
   @MutationAction({ mutate: ['name', 'avatar', 'roles'] })
   async GetUserInfo() {
     const token = getToken();
@@ -46,7 +38,7 @@ class User extends VuexModule implements IUserState {
     if (data.roles && data.roles.length) {
       return {
         name: data.name,
-        avatar: data.name,
+        avatar: data.avatar,
         roles: data.roles,
       };
     } else {
@@ -61,6 +53,14 @@ class User extends VuexModule implements IUserState {
     return {
       token: '',
       roles: [],
+    };
+  }
+
+  @MutationAction({ mutate: ['token'] })
+  async FedLogout() {
+    removeToken();
+    return {
+      token: '',
     };
   }
 }

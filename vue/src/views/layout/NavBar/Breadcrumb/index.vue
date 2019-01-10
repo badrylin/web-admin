@@ -34,7 +34,7 @@ export default class Breadcrumb extends Vue {
   getBreadcrumb() {
     let matched: any[] = this.$route.matched.filter((item) => !!item.name);
     if (matched[0] && matched[0].name !== 'Home') {
-      matched = [{ path: '/', meta: { title: 'Home' }}].concat(matched);
+      matched = [{ path: '/', meta: { title: 'Home' }} as RouteRecord].concat(matched);
     }
     this.levelList = matched;
   }
