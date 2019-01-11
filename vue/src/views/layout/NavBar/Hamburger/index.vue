@@ -1,12 +1,11 @@
 <template>
   <div>
-    <span @click="toggleClick">
-      <svg-icon
-        name="hamburger"
-        class="hamburger"
-        :class="{'is-active':isActive}"
-      ></svg-icon>
-    </span>
+    <svg-icon
+      name="hamburger"
+      class="hamburger"
+      :class="{'is-active':isActive}"
+      @click.native="toggleClick"
+    ></svg-icon>
   </div>
 </template>
 <script lang="ts">
