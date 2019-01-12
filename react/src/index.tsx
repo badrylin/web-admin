@@ -1,8 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './views/home/App';
 import * as serviceWorker from './serviceWorker';
+import AppRouter from './router/index';
+
+class App extends React.Component {
+  render() {
+    return (
+      <AppRouter></AppRouter>
+    );
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
