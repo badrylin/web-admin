@@ -10,22 +10,26 @@ import Child12 from '../views/table/children/children/Child1-2';
 
 export interface AppRoute {
   path: string;
-  name: string;
+  component: typeof Component;
+  name?: string;
   redirect?: string;
   exact?: boolean;
   meta?: any;
-  component: typeof Component;
   children?: AppRoute[];
 }
 
 const routerData: AppRoute[] = [
   {
-    path: '/',
-    redirect: '/home',
-    name: 'Home',
-    exact: true,
-    meta: { title: 'Home', icon: 'home'},
-    component: Home,
+    path: '/always',
+    redirect: '/always/home',
+    component: Layout,
+    meta: { title: 'Test', icon: 'test', alwaysShow: true},
+    children: [{
+      path: 'home',
+      name: 'Home',
+      component: Home,
+      meta: { title: 'Home', icon: 'home'},
+    }],
   },
   {
     path: '/example',
@@ -36,11 +40,13 @@ const routerData: AppRoute[] = [
     children: [{
       path: 'table',
       name: 'Table',
+      redirect: 'table/child1',
       component: TablePage,
       meta: {title: 'Table', icon: 'table'},
       children: [{
         path: 'child1',
         name: 'Child1',
+        redirect: 'child1/child1-1',
         component: Child1,
         meta: {title: 'Child1'},
         children: [{
@@ -65,6 +71,18 @@ const routerData: AppRoute[] = [
       name: 'Tree',
       component: TreePage,
       meta: {title: 'Tree', icon: 'tree'},
+    }],
+  },
+  {
+    path: '/',
+    redirect: '/home',
+    meta: { title: 'Home', icon: 'home'},
+    component: Layout,
+    children: [{
+      path: 'home',
+      name: 'Home',
+      component: Home,
+      meta: { title: 'Home', icon: 'home'},
     }],
   },
 ];
