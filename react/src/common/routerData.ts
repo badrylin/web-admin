@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { ComponentType } from 'react';
 import Layout from '../views/layout/index';
 import Home from '../views/home/index';
 import TablePage from '../views/table/index';
@@ -10,7 +10,7 @@ import Child12 from '../views/table/children/children/Child1-2';
 
 export interface AppRoute {
   path: string;
-  component: typeof Component;
+  component: ComponentType;
   name?: string;
   redirect?: string;
   exact?: boolean;
@@ -19,6 +19,18 @@ export interface AppRoute {
 }
 
 const routerData: AppRoute[] = [
+  {
+    path: '/',
+    redirect: '/home',
+    meta: { title: 'Home', icon: 'home'},
+    component: Layout,
+    children: [{
+      path: 'home',
+      name: 'Home',
+      component: Home,
+      meta: { title: 'Home', icon: 'home'},
+    }],
+  },
   {
     path: '/always',
     redirect: '/always/home',
@@ -71,18 +83,6 @@ const routerData: AppRoute[] = [
       name: 'Tree',
       component: TreePage,
       meta: {title: 'Tree', icon: 'tree'},
-    }],
-  },
-  {
-    path: '/',
-    redirect: '/home',
-    meta: { title: 'Home', icon: 'home'},
-    component: Layout,
-    children: [{
-      path: 'home',
-      name: 'Home',
-      component: Home,
-      meta: { title: 'Home', icon: 'home'},
     }],
   },
 ];

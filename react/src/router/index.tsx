@@ -13,6 +13,14 @@ import Home from '../views/home/index';
 
 export default class AppRouter extends React.PureComponent {
   getRoutes = (routes: AppRoute[], basePath: string = '/') => {
+    // 根目录route.path === '/'放最后
+    for (const route of routes) {
+      if (route.path === '/') {
+        routes = routes.filter((item) => item.path !== '/');
+        routes.push(route);
+        break;
+      }
+    }
     return routes.map((route) => {
       const resolePath = path.resolve(basePath, route.path);
       const resoleRedirect = route.redirect
