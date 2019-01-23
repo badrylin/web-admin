@@ -9,9 +9,7 @@ import { MemoryRouter } from 'react-router';
 class App extends React.Component {
   render() {
     return (
-      <MemoryRouter>
-        <AppRouter></AppRouter>
-      </MemoryRouter>
+      <AppRouter></AppRouter>
     );
   }
 }

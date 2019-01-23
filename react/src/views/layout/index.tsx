@@ -1,5 +1,5 @@
-import React from 'react';
-import { Layout } from 'antd';
+import React, { Suspense } from 'react';
+import { Layout, Spin } from 'antd';
 const { Header, Content } = Layout;
 import SideBar from './SideBar/index';
 import './index.scss';
@@ -12,9 +12,15 @@ export default class AppLayout extends React.Component<{}, {}> {
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-          {
-            this.props.children
-          }
+            <Suspense fallback={
+              <div className='main-loading'>
+                <Spin size='large'/>
+              </div>
+            }>
+              {
+                this.props.children
+              }
+            </Suspense>
           </Content>
         </Layout>
       </Layout>

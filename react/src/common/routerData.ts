@@ -1,16 +1,16 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, LazyExoticComponent } from 'react';
 import Layout from '../views/layout/index';
-import Home from '../views/home/index';
-import TablePage from '../views/table/index';
-import TreePage from '../views/tree/index';
-import Child1 from '../views/table/children/Child1';
-import Child2 from '../views/table/children/Child2';
-import Child11 from '../views/table/children/children/Child1-1';
-import Child12 from '../views/table/children/children/Child1-2';
+const Home = React.lazy(() => import('../views/home/index'));
+const TablePage = React.lazy(() => import('../views/table/index'));
+const TreePage = React.lazy(() => import('../views/tree/index'));
+const Child1 = React.lazy(() => import('../views/table/children/Child1'));
+const Child2 = React.lazy(() => import('../views/table/children/Child2'));
+const Child11 = React.lazy(() => import('../views/table/children/children/Child1-1'));
+const Child12 = React.lazy(() => import('../views/table/children/children/Child1-2'));
 
 export interface AppRoute {
   path: string;
-  component: ComponentType;
+  component: ComponentType | LazyExoticComponent<any>;
   name?: string;
   redirect?: string;
   exact?: boolean;
@@ -35,7 +35,7 @@ const routerData: AppRoute[] = [
     path: '/always',
     redirect: '/always/home',
     component: Layout,
-    meta: { title: 'Test', icon: 'test', alwaysShow: true},
+    meta: { title: 'Test', icon: 'test'},
     children: [{
       path: 'home',
       name: 'Home',

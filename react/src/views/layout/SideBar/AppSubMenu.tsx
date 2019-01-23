@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import routerData, { AppRoute } from '../../../common/routerData';
 import path from 'path';
+import { urlToList } from '../../../utils/pathTools';
 const {SubMenu, Item} = Menu;
 
 class AppSubMenu extends React.PureComponent<RouteComponentProps> {
@@ -17,10 +18,13 @@ class AppSubMenu extends React.PureComponent<RouteComponentProps> {
   getSubMenuOrItem = (item: AppRoute, basePath: string) => {
     if (item.children && item.children.length > 0) {
       const childremItems = this.getSideItems(item.children, path.resolve(basePath, item.path));
+      const key = item.path === '/'
+        ? path.resolve(basePath, item.redirect as string)
+        : path.resolve(basePath, item.path);
       return (
         <SubMenu
-          key={path.resolve(basePath, item.path)}
-          title={<span>{item.meta.title}</span>}
+          key={key}
+          title={<span><Icon type='user'/><span>{item.meta.title}</span></span>}
         >
           {childremItems}
         </SubMenu>
@@ -29,27 +33,26 @@ class AppSubMenu extends React.PureComponent<RouteComponentProps> {
       return (
         <Item key={path.resolve(basePath, item.path)}>
           <Link to={path.resolve(basePath, item.path)}>
-            {item.meta.title}
+            {<span><Icon type='user'/><span>{item.meta.title}</span></span>}
           </Link>
         </Item>
       );
     }
   }
-  handleSelect = ({ item, key, selectedKeys }: any) => {
-    console.log(item, key, selectedKeys);
-  }
   handleChange = (openKeys: string[]) => {
     console.log('openKeys:', openKeys);
   }
   render() {
-    // console.log('f');
+    console.log(this.props);
+    const { location: {pathname} } = this.props;
+    const pathList = urlToList(pathname);
     return(
       <Menu
         theme='dark'
-        // defaultOpenKeys={['/example', '/example/table', '/example/table/child1']}
-        // defaultSelectedKeys= {['/example/table/child1/child1-1']}
+        inlineCollapsed={true}
         mode='inline'
-        // onSelect={this.handleChange}
+        defaultOpenKeys={pathList}
+        defaultSelectedKeys= {[pathname]}
         onOpenChange={this.handleChange}
       >
         {this.getSideItems(routerData)}
