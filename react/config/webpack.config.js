@@ -465,6 +465,20 @@ module.exports = function(webpackEnv) {
               //     }
               //   }]),
             },
+            // 使用svg-sprite-loader和svgo-loader处理src/icons下的svg文件
+            {
+              test: /\.(svg)(\?.*)?$/,
+              include: paths.svgIconPath,
+              use: [{
+                loader: 'svg-sprite-loader',
+                options: {
+                  symbolId: 'icon-[name]'
+                }
+              }, {
+                loader: 'svgo-loader',
+                options: paths.svgoConfig
+              }]
+            },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.

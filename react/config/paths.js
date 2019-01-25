@@ -82,6 +82,8 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  svgIconPath: resolveApp('src/icons'),
+  svgoConfig: resolveApp('svgo.config.js'),
 };
 
 

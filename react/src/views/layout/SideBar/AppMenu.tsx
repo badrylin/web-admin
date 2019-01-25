@@ -1,12 +1,18 @@
 import React from 'react';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import {menuData, AppRoute } from '../../../common/routerData';
 import path from 'path';
 import { urlToList } from '../../../utils/pathTools';
+import SvgIcon from '../../../components/SvgIcon/index';
+import Sider from 'antd/lib/layout/Sider';
 const {SubMenu, Item} = Menu;
 
-class AppMenu extends React.PureComponent<RouteComponentProps> {
+interface IProps {
+  collapsed: boolean;
+}
+type AllProps = RouteComponentProps & IProps;
+class AppMenu extends React.PureComponent<AllProps> {
   // 获取菜单列表
   getMenuList = (menusData: AppRoute[], basePath: string = '') => {
     return menusData.filter((item) => {
@@ -24,7 +30,7 @@ class AppMenu extends React.PureComponent<RouteComponentProps> {
       return (
         <SubMenu
           key={resolePath}
-          title={<span><Icon type='user'/><span>{item.meta.title}</span></span>}
+          title={<><SvgIcon name={item.meta.icon}/><span>{item.meta.title}</span></>}
         >
           {childremItems}
         </SubMenu>
@@ -42,19 +48,15 @@ class AppMenu extends React.PureComponent<RouteComponentProps> {
     if (/^https?:\/\//.test(item.path)) {
       return (
         <a href={item.path} target={item.meta.target}>
-          <Icon type='user'/>
+          <SvgIcon name={item.meta.icon}/>
           <span>{item.meta.title}</span>
         </a>
       );
     } else {
       return (
         <Link to={resolvePath} target={item.meta.target}>
-          {
-            <span>
-              <Icon type='user'/>
-              <span>{item.meta.title}</span>
-            </span>
-          }
+          <SvgIcon name={item.meta.icon}/>
+          <span>{item.meta.title}</span>
         </Link>
       );
     }
@@ -63,14 +65,20 @@ class AppMenu extends React.PureComponent<RouteComponentProps> {
     const { location: {pathname} } = this.props;
     const pathList = urlToList(pathname);
     return(
-      <Menu
-        theme='dark'
-        mode='inline'
-        defaultOpenKeys={pathList}
-        defaultSelectedKeys= {[pathname]}
+      <Sider
+        className='siderbar'
+        collapsed={this.props.collapsed}
       >
-        {this.getMenuList(menuData)}
-      </Menu>
+        <div className='logo' />
+        <Menu
+          theme='dark'
+          mode='inline'
+          defaultOpenKeys={pathList}
+          defaultSelectedKeys= {[pathname]}
+        >
+          {this.getMenuList(menuData)}
+        </Menu>
+      </Sider>
     );
   }
 }

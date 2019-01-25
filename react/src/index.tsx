@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-// import App from './views/home/App';
 import * as serviceWorker from './serviceWorker';
 import AppRouter from './router/index';
-import { MemoryRouter } from 'react-router';
+import './index.css';
+import './icons/index';
+import { Provider } from 'react-redux';
+import { store } from './store/index';
 
 class App extends React.Component {
   render() {
     return (
-      <AppRouter></AppRouter>
+      <Provider store={store}>
+        <AppRouter></AppRouter>
+      </Provider>
     );
   }
 }
