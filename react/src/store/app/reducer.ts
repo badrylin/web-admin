@@ -19,8 +19,30 @@ const reducer: Reducer<AppState> = (state = initialState, action) => {
           withoutAnimation: action.withoutAnimation,
         },
       };
+    case AppActionTypes.OPEN_SIDEBAR:
+      return {
+        ...state,
+        sidebar: {
+          ...state.sidebar,
+          opened: true,
+        },
+      };
+    case AppActionTypes.CLOSE_SIDEBAR:
+      return {
+        ...state,
+        sidebar: {
+          ...state.sidebar,
+          opened: false,
+        },
+      };
+    case AppActionTypes.TOGGLE_DEVICE:
+      return {
+        ...state,
+        device: action.device,
+      };
+    default:
+      return state;
   }
-  return state;
 };
 
 export { reducer as appReducer };

@@ -10,6 +10,7 @@ export interface SideBar extends Record<string, any> {
 
 export enum AppActionTypes {
   TOGGLE_SIDEBAR = '@@app/TOGGLE_SIDEBAR',
+  OPEN_SIDEBAR = '@@app/OPEN_SIDEBAR',
   CLOSE_SIDEBAR = '@@app/CLOSE_SIDEBAR',
   TOGGLE_DEVICE = '@@app/TOGGLE_DEVICE',
 }
