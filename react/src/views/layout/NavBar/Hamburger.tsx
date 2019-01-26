@@ -3,7 +3,7 @@ import { Icon } from 'antd';
 import { connect } from 'react-redux';
 import { AllState } from '../../../store/index';
 import { Dispatch } from 'redux';
-import { ToggleSideBar } from '../../../store/app/actions';
+import { toggleSideBar } from '../../../store/app/actions';
 
 interface IProps {
   opened: boolean;
@@ -12,9 +12,9 @@ interface IProps {
 
 class Hamburger extends React.Component<IProps> {
   render() {
-    const { opened, toggleSideBar } = this.props;
+    const { opened } = this.props;
     return (
-      <span className='hamburger' onClick={() => toggleSideBar(false)}>
+      <span className='hamburger' onClick={() => this.props.toggleSideBar(false)}>
         <Icon type={opened ? 'menu-fold' : 'menu-unfold' } />
       </span>
     );
@@ -23,6 +23,6 @@ class Hamburger extends React.Component<IProps> {
 
 export default connect(({app}: AllState) => ({
   opened: app.sidebar.opened,
-}), (dispatch: Dispatch) => ({
-  toggleSideBar: (withoutAnimation: boolean) => dispatch(ToggleSideBar(withoutAnimation)),
-}))(Hamburger);
+}), {
+  toggleSideBar,
+})(Hamburger);
