@@ -38,10 +38,18 @@ export const menuData: AppRoute[] = [
         meta: {title: 'Table', icon: 'table'},
         children: [
           {
+            path: '/example/table',
+            redirect: '/example/table/child1',
+          },
+          {
             path: 'child1',
             component: Child1,
             meta: {title: 'Child1'},
             children: [
+              {
+                path: '/example/table/child1',
+                redirect: '/example/table/child1/child1-1',
+              },
               {
                 path: 'child1-1',
                 component: Child11,
@@ -87,6 +95,7 @@ const routerData: AppRoute[] = [
   },
 ];
 
+// 格式化路由，redirect放在当前路由层级最后
 const formatRouterData = (data: AppRoute[]): AppRoute[] => {
   data.forEach((route) => {
     if (route.children) {

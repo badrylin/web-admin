@@ -27,14 +27,42 @@
 }
 
 .navbar{
+  display: flex;
   .hamburger{
     font-size: 20px;
     height: 64px;
     cursor: pointer;
+    flex: 0 0 auto;
     transition: all .3s,padding 0s;
-    padding: 20px 24px;
+    padding: 0 24px;
     &:hover{
       background-color: rgba(0,0,0,.025);
+    }
+  }
+  .breadcrumb{
+    flex: 1 1 auto;
+    display: inline-block;
+    line-height: 64px;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+  }
+  .avatar-wrapper {
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+    margin-right: 35px;
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+    }
+    .anticon-caret-down{
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.65);
+      position: absolute;
+      bottom: 8px;
+      right: -20px;
     }
   }
 }
