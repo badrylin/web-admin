@@ -14,8 +14,11 @@ class Breadcrumb extends React.PureComponent<RouteComponentProps> {
           pathList.map((path, index) => {
             return (
               <AntdBreadcrumb.Item key={index}>
-                {/* <Link to={path}>{nameList[index]}</Link> */}
-                {nameList[index]}
+                {
+                  pathList.length - 1 === index
+                  ? nameList[index]
+                  : <Link to={path}>{nameList[index]}</Link>
+                }
               </AntdBreadcrumb.Item>
             );
           })

@@ -6,13 +6,41 @@ import path from 'path';
 import { urlToList } from '../../../utils/pathTools';
 import SvgIcon from '../../../components/SvgIcon/index';
 import Sider from 'antd/lib/layout/Sider';
+import { Location } from 'history';
 const {SubMenu, Item} = Menu;
+let unlisten: () => void;
 
 interface IProps {
   collapsed: boolean;
 }
 type AllProps = RouteComponentProps & IProps;
-class AppMenu extends React.PureComponent<AllProps> {
+interface IState {
+  openKeys: string[];
+  selectedKeys: string[];
+}
+class AppMenu extends React.PureComponent<AllProps, IState> {
+  state: Readonly<IState> = {
+    openKeys: [],
+    selectedKeys: [],
+  };
+  componentDidMount() {
+    this.handleRouteDidChange(this.props.location);
+    // 监控路由变化
+    unlisten = this.props.history.listen((location) => {
+      this.handleRouteDidChange(location);
+    });
+  }
+  componentWillUnmount() {
+    unlisten();
+  }
+  handleRouteDidChange(location: Location) {
+    const {pathname} = location;
+    const pathList = urlToList(pathname);
+    this.setState({
+      openKeys: pathList,
+      selectedKeys: [pathname],
+    });
+  }
   // 获取菜单列表
   getMenuList = (menusData: AppRoute[], basePath: string = '') => {
     return menusData.filter((item) => {
@@ -43,7 +71,7 @@ class AppMenu extends React.PureComponent<AllProps> {
       );
     }
   }
-  // 判断path是否为http外链
+  // 根据path类型，判断是否为http外链，生成不同MenuItem
   getMenuItemLink = (item: AppRoute, resolvePath: string) => {
     if (/^https?:\/\//.test(item.path)) {
       return (
@@ -61,20 +89,29 @@ class AppMenu extends React.PureComponent<AllProps> {
       );
     }
   }
+  handleOpenChange = (openKeys: string[]) => {
+    this.setState({
+      openKeys,
+    });
+  }
   render() {
-    const { location: {pathname} } = this.props;
-    const pathList = urlToList(pathname);
+    const { collapsed } = this.props;
+    const { openKeys, selectedKeys } = this.state;
+    const props = collapsed ? {} : {
+      onOpenChange: this.handleOpenChange,
+      openKeys,
+    };
     return(
       <Sider
         className='siderbar'
-        collapsed={this.props.collapsed}
+        collapsed={collapsed}
       >
         <div className='logo' />
         <Menu
           theme='dark'
           mode='inline'
-          defaultOpenKeys={pathList}
-          defaultSelectedKeys= {[pathname]}
+          selectedKeys={selectedKeys}
+          {...props}
         >
           {this.getMenuList(menuData)}
         </Menu>
