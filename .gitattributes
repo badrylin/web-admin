@@ -1,2 +1,3 @@
+*. linguist-language=typescript
 *.ts linguist-language=typescript
 *.tsx linguist-language=typescript
