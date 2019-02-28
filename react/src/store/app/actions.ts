@@ -1,10 +1,11 @@
 import { AppActionTypes, DeviceType } from './types';
+import { store } from '../index';
 
 export const toggleSideBar = (withoutAnimation: boolean) => {
-  return {
+  store.dispatch({
     type: AppActionTypes.TOGGLE_SIDEBAR,
     withoutAnimation,
-  };
+  });
 };
 
 export const openSideBar = () => {

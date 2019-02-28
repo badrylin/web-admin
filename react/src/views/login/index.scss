@@ -1,0 +1,53 @@
+.login-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: #2d3a4b;
+  color: #fff;
+  .login-form {
+    width: 520px;
+    max-width: 100%;
+    padding: 35px 35px 15px 35px;
+    margin: 120px auto;
+    .title {
+      font-size: 26px;
+      font-weight: 400;
+      color: #eee;
+      margin: 0px auto 40px auto;
+      text-align: center;
+      font-weight: bold;
+    }
+    .login-form-forgot {
+      float: right;
+    }
+    .login-form-button {
+      width: 100%;
+    }
+    .tips {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      span {
+        &:first-of-type {
+          margin-right: 16px;
+        }
+      }
+    }
+    .show-pwd {
+      position: absolute;
+      right: 0;
+      top: -6px;
+      font-size: 16px;
+      color: #889aa4;
+      cursor: pointer;
+      user-select: none;
+      width: 32px;
+      height: 32px;
+      text-align: center;
+      .svg-icon {
+        margin-right: 0;
+        margin-bottom: 3px;
+      }
+    }
+  }
+}

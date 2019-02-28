@@ -6,6 +6,8 @@ import './index.css';
 import './icons/index';
 import { Provider } from 'react-redux';
 import { store } from './store/index';
+import './mock';
+import test from './test';
 
 class App extends React.Component {
   render() {

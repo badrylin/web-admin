@@ -14,7 +14,7 @@ class Hamburger extends React.Component<IProps> {
   render() {
     const { opened } = this.props;
     return (
-      <span className='hamburger' onClick={() => this.props.toggleSideBar(false)}>
+      <span className='hamburger' onClick={() => toggleSideBar(false)}>
         <Icon type={opened ? 'menu-fold' : 'menu-unfold' } />
       </span>
     );

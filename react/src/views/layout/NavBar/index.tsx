@@ -3,8 +3,14 @@ import Hamburger from './Hamburger';
 import Breadcrumb from './Breadcrumb';
 import { Menu, Dropdown, Icon } from 'antd';
 import { Link } from 'react-router-dom';
+import { Logout } from '../../../store/user/actions';
 
 export default class NavBar extends React.Component {
+  handleLogout = () => {
+    Logout().then(() => {
+      window.location.reload();
+    });
+  }
   render() {
     const menu = (
       <Menu>
@@ -12,7 +18,9 @@ export default class NavBar extends React.Component {
           <Link to='/home'>home</Link>
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key='1'>LogOut</Menu.Item>
+        <Menu.Item key='1'>
+          <div onClick={this.handleLogout}>Logout</div>
+        </Menu.Item>
       </Menu>
     );
     return(
@@ -24,7 +32,7 @@ export default class NavBar extends React.Component {
           trigger={['click']}
         >
           <a className='avatar-wrapper' href='#'>
-            <img src='https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif' className='user-avatar'></img>
+            <img src='http://dummyimage.com/40x40' className='user-avatar'></img>
             <Icon type='caret-down' />
           </a>
         </Dropdown>

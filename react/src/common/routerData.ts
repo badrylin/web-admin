@@ -1,17 +1,19 @@
 import React, { ComponentType, LazyExoticComponent } from 'react';
 import Layout from '../views/layout/index';
 import Login from '../views/login/index';
-const Home = React.lazy(() => import('../views/home/index'));
-const TablePage = React.lazy(() => import('../views/table/index'));
-const TreePage = React.lazy(() => import('../views/tree/index'));
-const Child1 = React.lazy(() => import('../views/table/children/Child1'));
-const Child2 = React.lazy(() => import('../views/table/children/Child2'));
-const Child11 = React.lazy(() => import('../views/table/children/children/Child1-1'));
-const Child12 = React.lazy(() => import('../views/table/children/children/Child1-2'));
+import { routerGuard } from '../permission';
+const Home = routerGuard(React.lazy(() => import('../views/home/index')));
+const TablePage = routerGuard(React.lazy(() => import('../views/table/index')));
+const TreePage = routerGuard(React.lazy(() => import('../views/tree/index')));
+const Child1 = routerGuard(React.lazy(() => import('../views/table/children/Child1')));
+const Child2 = routerGuard(React.lazy(() => import('../views/table/children/Child2')));
+const Child11 = routerGuard(React.lazy(() => import('../views/table/children/children/Child1-1')));
+const Child12 = routerGuard(React.lazy(() => import('../views/table/children/children/Child1-2')));
 
+export type AppRouteComponent = ComponentType | LazyExoticComponent<any>;
 export interface AppRoute {
   path: string;
-  component?: ComponentType | LazyExoticComponent<any>;
+  component?: AppRouteComponent;
   name?: string;
   redirect?: string;
   exact?: boolean;

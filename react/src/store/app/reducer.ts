@@ -1,4 +1,4 @@
-import { AppState, DeviceType, AppActionTypes } from './types';
+import { AppState, DeviceType, AppActionTypes as Types } from './types';
 import { Reducer } from 'redux';
 
 const initialState: AppState = {
@@ -11,7 +11,7 @@ const initialState: AppState = {
 
 const reducer: Reducer<AppState> = (state = initialState, action) => {
   switch (action.type) {
-    case AppActionTypes.TOGGLE_SIDEBAR:
+    case Types.TOGGLE_SIDEBAR:
       return {
         ...state,
         sidebar: {
@@ -19,7 +19,7 @@ const reducer: Reducer<AppState> = (state = initialState, action) => {
           withoutAnimation: action.withoutAnimation,
         },
       };
-    case AppActionTypes.OPEN_SIDEBAR:
+    case Types.OPEN_SIDEBAR:
       return {
         ...state,
         sidebar: {
@@ -27,7 +27,7 @@ const reducer: Reducer<AppState> = (state = initialState, action) => {
           opened: true,
         },
       };
-    case AppActionTypes.CLOSE_SIDEBAR:
+    case Types.CLOSE_SIDEBAR:
       return {
         ...state,
         sidebar: {
@@ -35,7 +35,7 @@ const reducer: Reducer<AppState> = (state = initialState, action) => {
           opened: false,
         },
       };
-    case AppActionTypes.TOGGLE_DEVICE:
+    case Types.TOGGLE_DEVICE:
       return {
         ...state,
         device: action.device,

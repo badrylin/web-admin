@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import routerData, { AppRoute } from '../common/routerData';
 import path from 'path';
 
@@ -32,7 +32,7 @@ export default class AppRouter extends React.PureComponent {
               if (route.component) {
                 return <route.component>{ChildNode}</route.component>;
               } else {
-                return <Switch>{ChildNode}</Switch>;
+                return ChildNode;
               }
             // 无子路由
             } else {

@@ -18,7 +18,7 @@ interface IState {
   openKeys: string[];
   selectedKeys: string[];
 }
-class AppMenu extends React.PureComponent<AllProps, IState> {
+class AppMenu extends React.Component<AllProps, IState> {
   state: Readonly<IState> = {
     openKeys: [],
     selectedKeys: [],
