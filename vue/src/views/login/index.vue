@@ -6,7 +6,7 @@
       :rules="loginRules"
       class="login-form"
     >
-      <h3 class="title">vue-typescript-admin-template</h3>
+      <h3 class="title">vue-admin</h3>
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon name="user" />

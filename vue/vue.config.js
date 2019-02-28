@@ -3,6 +3,7 @@ const path = require('path')
 const svgoConfig = require('./svgo.config')
 
 module.exports = {
+  baseUrl:  process.env.NODE_ENV === 'production' ? '/vue-admin/' : '/',
   configureWebpack: config => {
     var configMerge = {}
     if (process.env.NODE_ENV === 'development') {
